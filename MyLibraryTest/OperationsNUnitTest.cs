@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,6 +60,28 @@ namespace MyLibrary
 
         }
 
+        [Test]
+        public void GetNumbers_InputtwoNumber_ReturnNumber() { 
+            Operations operations= new ();
+            int number1 = 1;
+            int number2 = 10;
+
+            var result = operations.GetNumbers(number1, number2);
+
+            Assert.That(result, Is.Not.Empty);
+            Assert.That(result, Is.Ordered);
+            Assert.That(result, Is.Unique);
+            Assert.That(result, Does.Contain(1));
+            Assert.That(result, Does.Contein(10));
+            Assert.That(result, Does.Not.Contein(0));
+            Assert.That(result, Does.Not.Contein(11));
+            Assert.That(result, Has.Member(5));
+            Assert.That(result, Has.Not.Member(-1));
+            Assert.That(result[0], Is.TypeOf<int>());
+            Assert.That(result, Has.All.InRange(0,10));
+
+
+        }
         
     }
 }
