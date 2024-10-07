@@ -21,6 +21,21 @@ namespace MyLibrary
         {
             return number1 + number2;
         }
+        //ArrayList=List
+        public IList<int> GetEvenNumber(int start, int end)
+        {
+            //List<int> evenNumber = new List<int>();
+            //for (int i = start; i < end; i++)
+            //{
+            //    if (i % 2 == 0) { 
+            //        evenNumber.Add(i);
+            //    }
+            //}
+            //return evenNumber;
+
+            return Enumerable.Range(start, end)
+                .Where(IsEven).ToList(); //Linkque; API stream
+        }
     }
 }
 
