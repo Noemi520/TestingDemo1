@@ -61,12 +61,11 @@ namespace MyLibrary
         }
 
         [Test]
-        public void GetNumbers_InputtwoNumber_ReturnNumber() { 
+        public void GetArrayNumber_InputtwoNumber_ReturnNumber() { 
             Operations operations= new ();
-            int number1 = 1;
-            int number2 = 10;
-
-            var result = operations.GetNumbers(number1, number2);
+            int start = 1;
+            int end = 10;
+            var result = operations.GetArrayNumber(start, end);
 
             Assert.That(result, Is.Not.Empty);
             Assert.That(result, Is.Ordered);
