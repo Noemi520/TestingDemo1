@@ -61,26 +61,61 @@ namespace MyLibrary
         }
 
         [Test]
-        public void GetArrayNumber_InputtwoNumber_ReturnNumber() { 
+        public void GetEvenNumber_InputRange_ReturnEvenNumber() { 
             Operations operations= new ();
-            int start = 1;
+            int start = 0;
             int end = 10;
-            var result = operations.GetArrayNumber(start, end);
+            var result = operations.GetEvenNumber(start, end);  //pongo var en la clase operation ya definimos que variable seria
 
+         
             Assert.That(result, Is.Not.Empty);
             Assert.That(result, Is.Ordered);
-            Assert.That(result, Is.Unique);
-            Assert.That(result, Does.Contain(1));
+            Assert.That(result, Is.Unique); //no tenga valores añadidos
+            Assert.That(result, Does.Contain(0));
             Assert.That(result, Does.Contain(10));
-            Assert.That(result, Does.Not.Contain(0));
+            Assert.That(result, Does.Not.Contain(-1));
             Assert.That(result, Does.Not.Contain(11));
-            Assert.That(result, Has.Member(5));
-            Assert.That(result, Has.Not.Member(-1));
+            Assert.That(result, Has.Member(6));
+            Assert.That(result, Has.No.Member(-1));
             Assert.That(result[0], Is.TypeOf<int>());
-            Assert.That(result, Has.All.InRange(1,10));
+            Assert.That(result, Has.All.InRange(0,8));
+           // Assert.That(result,Has.Exactly(5).Items);
+           Assert.That(result,Is.EquivalentTo(new[] { 2, 4,  6,  8 }));
 
 
         }
-        
+        [Test]
+        [TestCase(1,20)]
+        [TestCase(100,1000)]
+        public void GetEvenNumber_SeveralInputRange_returnEvenNumbers(int start,int end)
+        {
+            Operations operations = new();
+            int startNumber=start%2==0?start:start+1;
+            int endNumber = end % 2 == 0 ? end : end - 1;
+            int middleNumber=(startNumber+endNumber)/2;
+            middleNumber=middleNumber%2==0?middleNumber:middleNumber+1;
+           
+            var result = operations.GetEvenNumber(start, end);  //pongo var en la clase operation ya definimos que variable seria
+
+            Assert.That(end - start >=2,Is.True);
+            Assert.That(result, Is.Not.Empty);
+            Assert.That(result[0], Is.TypeOf<int>());
+            Assert.That(result, Is.Ordered);
+            Assert.That(result, Has.No.All.LessThan(startNumber));
+            Assert.That(result, Has.Member(startNumber));
+            Assert.That(result, Has.Member(middleNumber));
+            Assert.That(result, Has.Member(endNumber));
+            Assert.That(result, Has.No.All.GreaterThan(endNumber));
+            Assert.That(result, Is.Unique); //no tenga valores añadidos y sean unicos
+            //Assert.That(result, Does.Contain(startNumber));
+            //Assert.That(result, Does.Contain(endNumber));
+            //Assert.That(result, Does.Not.Contain(-1));
+            //Assert.That(result, Does.Not.Contain(11));
+            //Assert.That(result, Has.All.InRange(startNumber,endNumber));
+          //Assert.That(result, Is.EquivalentTo(new[] { 2, 4, 6, 8 }));
+
+
+        }
+
     }
 }
